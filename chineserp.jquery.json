@@ -1,0 +1,27 @@
+{
+  "name": "jquery.chineserp",
+  "title": "Chinese region picker for jQuery plugin",
+  "description": "The best Chinese region picker for jQuery plugin",
+  "version": "0.0.1",
+  "homepage": "https://github.com/xixilive/chineserp-jquery",
+  "author": {
+    "name": "xixilive",
+    "email": "xixilive@gmail.com",
+    "url": "https://github.com/xixilive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/xixilive/chineserp-jquery.git"
+  },
+  "bugs": "https://github.com/xixilive/chineserp-jquery/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/xixilive/chineserp-jquery/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.5 <=1.9.1"
+  },
+  "keywords": ["chinese regions", "picker", "selector", "jquery", "jquery plugin"]
+}

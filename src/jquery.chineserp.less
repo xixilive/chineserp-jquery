@@ -1,0 +1,42 @@
+#region-selector{
+  
+}
+
+#region-picker{
+  display: inline-block;
+  vertical-align: top;
+
+  .region-list{
+    display: inline-block;
+    list-style: none;
+    margin:0 10px;
+    padding:0;
+    width:180px;
+    vertical-align: top;
+
+    li{
+      color:#333;
+      height: 25px;
+      line-height: 25px;
+      border: 1px solid #CCC;
+      background-color: #EEE;
+      margin-bottom: 1px;
+      cursor: pointer;
+
+      .picked, .picked:hover{
+        background-color: #C00;
+        color:#FFF;
+      }
+
+      &:hover{
+        background-color: #DDD;
+      }
+    }
+  }
+
+  .picker-actions{
+    display: block;
+    text-align: right;
+    padding: 20px;
+  }
+}
