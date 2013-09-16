@@ -31,10 +31,10 @@
 
     this.overlay = $("#region-picker");
     this.container = $('.regions', this.overlay);
-    this.container.on('click', '.region-list li', $.proxy(this.onItemClick, this));
+    this.container.on('rendered', '.region-list', $.proxy(this._onListRendered, this));
+    this.container.on('click', '.region-list li', $.proxy(this._onItemClick, this));
 
-    $(window).on('resize', $.proxy(this.show, this));
-    $(this.closer) && $(this.closer).on('click', $.proxy(this.onCloserClick, this));
+    $(this.closer) && $(this.closer).on('click', $.proxy(this._onCloserClick, this));
 
     return this.render(regions, collections);
   };
@@ -42,18 +42,18 @@
   PickerRenderer.prototype = {
 
     /**
-    * onItemClick, region item click handler
+    * _onItemClick, region item click handler
     * @param {Object} e, relative event object
     * @return undefined
     */
-    onItemClick: function(e){
+    _onItemClick: function(e){
       var self = this, el = $(e.currentTarget);
       this.picker.picker.pick(el.data('region').i, function(regions, collections){
         self.render(regions, collections, el.data('region') === regions[regions.length-1]);
       });
     },
 
-    onCloserClick: function(e){
+    _onCloserClick: function(e){
       this.overlay.hide();
     },
 
@@ -66,21 +66,20 @@
     */
     render: function(regions, collections, confirmed){
       var container = this.container.empty();
-      var ul, li;
+
       collections.forEach(function(collection, i){
-        ul = $('<ul>').addClass('region-list');
-        collection.forEach(function(r){
-          li = $('<li>').text(r.n).data('region', r);
-          if(regions[i] && regions[i].i === r.i){
-            li.addClass('picked');
-          }
-          li.appendTo(ul);
-        });
-        ul.appendTo(container);
+        $('<ul class="region-list">')
+          .append(collection.map(function(r){
+            return $('<li></li>')
+              .text(r.n)
+              .data('region', r)
+              .attr('class', (regions[i] && regions[i].i === r.i) ? 'picked' : null);
+          }))
+          .appendTo(container)
+          .trigger('rendered');
       });
-      this._resizeContaier();
       
-      if(confirmed){
+      if(confirmed === true){
         this.overlay.hide();
         this.picker.picked(regions, collections, confirmed);
         return this;
@@ -97,31 +96,26 @@
     show: function(){
       var offset = this.picker.el.position();
       this.overlay.css({
-        top: offset.top + this.picker.el.outerHeight(true),
+        top: offset.top + this.picker.el.outerHeight(true)+5,
         left: offset.left
       }).show();
       return this;
     },
 
     /**
-    * _resizeContaier, re-calculate container's position and size
-    * @return {Object} PickerRenderer object
+    * _onListRendered, fired when a region-list has appended to container
+    * @param {Object} e, event object
+    * @return undefined
     */
-    _resizeContaier: function(){
-      var w = 0, items = this.picker.options.items || 10, picked;
-      var h = $('.region-list li:first').outerHeight(true);
-      $('.region-list', this.container).each(function(){
-        $(this).height(h * items);
-        w += $(this).outerWidth(true) + 1;
-
-        //scroll picked element into view
-        picked = $(this).children('.picked').index() + 1;
-        if(picked - items > 0){
-          $(this).scrollTop(h * (picked - items + 1));
-        }
-      });
-      this.container.width(w);
-      return this;
+    _onListRendered: function(e){
+      var el = $(e.currentTarget), picked;
+      var w = 0, items = this.picker.options.items || 10;
+      var h = $('li:first', el).outerHeight(true);
+      el.height(h * items);
+      picked = $('.picked:first', el).index() + 1;
+      if(picked - items > 0){
+        el.scrollTop(h * (picked - items + 1));
+      }
     }
   };
 
@@ -213,7 +207,7 @@
       mode: 'picker',
       region: ''
     }, options || {});
-    console.log(this.options);
+
     new cr.RegionPicker({
       remote: this.options.remote,
       initialized: $.proxy(this.pickerInitialized, this)
