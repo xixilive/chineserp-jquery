@@ -1,42 +1,78 @@
-#region-selector{
-  
+// inline block mixin
+.inline-block(){
+  display: inline-block;
+  vertical-align: top;
+  *display: inline;
+  *zoom: 1;
+}
+
+.box-shadow(@color: #666){
+  -moz-box-shadow:0px 0px 5px @color;
+  -webkit-box-shadow:0px 0px 5px @color;
+  box-shadow:0px 0px 5px @color;
 }
 
 #region-picker{
-  display: inline-block;
-  vertical-align: top;
+  .inline-block();
+  .box-shadow();
+  position: absolute;
+  z-index: 1000;
+  background-color: #FFF;
+  padding: 18px;
+  border: 1px solid #666\9;
 
-  .region-list{
-    display: inline-block;
-    list-style: none;
-    margin:0 10px;
-    padding:0;
-    width:180px;
-    vertical-align: top;
+  padding:0;
+  margin:0;
+  top: 0;
+  left: 0;
+  text-align: right;
 
-    li{
-      color:#333;
-      height: 25px;
-      line-height: 25px;
-      border: 1px solid #CCC;
+  .regions{
+    margin: 0;
+    padding: 0 0 5px;
+  
+    .region-list{
+      .inline-block();
+      text-align: left;
+      list-style: none;
+      padding: 0;
+      margin: 0 5px;
+      width: 250px;
+      border: 1px solid #DDD;
       background-color: #EEE;
-      margin-bottom: 1px;
-      cursor: pointer;
+      overflow: auto;
+      vertical-align: top;
 
-      .picked, .picked:hover{
-        background-color: #C00;
-        color:#FFF;
-      }
+      li{
+        color:#333;
+        height: 25px;
+        line-height: 25px;
+        font-size: 100%;
+        padding: 0 5px;
+        margin: 0;
+        cursor: pointer;
 
-      &:hover{
-        background-color: #DDD;
+        &.picked, &.picked:hover{
+          background-color: #C00;
+          color:#FFF;
+        }
+
+        &:hover{
+          background-color: #F2F2F2;
+        }
       }
     }
   }
 
-  .picker-actions{
-    display: block;
-    text-align: right;
-    padding: 20px;
+  .region-picker-closer{
+    .inline-block();
+    width:20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    color: #666;
   }
 }

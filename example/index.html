@@ -4,13 +4,74 @@
   <meta charset="utf-8">
   <title>Chinese region picker Test Suite</title>
   <script src="../libs/jquery-loader.js"></script>
+  <script src="../example/chineserp.min.js"></script>
   <script src="../src/jquery.chineserp.js"></script>
   <link rel="stylesheet" href="../dist/jquery.chineserp.css" media="screen">
+  <style type="text/css">
+  body{padding:20px;font-size:14px;line-height:200%;color:#333;}
+  #picker input{border:1px solid #666;padding:5px;width: 300px;background-color: #EEE;}
+  #selector select{border:1px solid #666;padding:5px;margin-right:10px;}
+  </style>
 </head>
 <body>
+<h1>Act as selectors</h1>
+<div id="selector">
+  <select></select>
+  <select></select>
+  <select></select>
+  <p></p>
+</div>
+
+
+<h1>Act as a picker</h1>
+<div id="picker">
+  <input type="text" readonly="readonly" value="新疆维吾尔自治区,喀什地区,巴楚县" /> <a href="javascript:;" >pickup a region</a>
+</div>
 
 <script type="text/javascript">
   $(function(){
+
+    $('#picker a').regionPicker({
+      mode: 'picker',
+      remote: '/example',
+      region: $('#picker input').val(),
+      initialize: function(picker){
+        picker.el.text('initializing...');
+      },
+
+      initialized: function(regions, collections, picker){
+        picker.el.text('pickup a region');
+      },
+
+      picked: function(regions, collections, confirmed, picker){
+        if(confirmed){
+          $('#picker input').val(regions.map(function(r){ return r.n; }).join(','));
+        }
+      }
+    });
+
+    $('#selector').regionPicker({
+      mode: 'selector',
+      remote: '/example',
+      initialize: function(picker){
+        $('#selector select').attr('disabled', true);
+      },
+
+      initialized: function(regions, collections, picker){
+        $('#selector select').attr('disabled', false);
+      },
+
+      picked: function(regions, collections, picker){
+        $('#selector p').text(regions.map(function(r){ return r.n; }).join(' > '));
+      },
+
+      option: {
+        text: 'n',
+        value: 'i'
+      }
+      
+    });
+
   });
 </script>
 </body>
