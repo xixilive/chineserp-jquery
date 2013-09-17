@@ -92,7 +92,7 @@
       if(this.renderer.css('display') !== 'none'){
         return;
       }
-      var offset = this.el.position();
+      var offset = this.el.offset();
       this.renderer.css({
         top: offset.top + this.el.outerHeight(true),
         left: offset.left
