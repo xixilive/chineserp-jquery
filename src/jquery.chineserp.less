@@ -12,6 +12,19 @@
   box-shadow:0px 0px 5px @color;
 }
 
+/**
+  DOM
+  <div id="region-picker">
+    <a href="javascript:;" class="region-picker-closer" title="cancel">&#215;</a>
+    <div class="regions">
+      <ul class="region-list">
+        <li>REGION</li>
+        ...
+      </ul>
+      ...
+    </div>
+  </div>
+*/
 #region-picker{
   .inline-block();
   .box-shadow();
@@ -39,7 +52,7 @@
       margin: 0 5px;
       width: 250px;
       border: 1px solid #DDD;
-      background-color: #EEE;
+      background-color: #F2F2F2;
       overflow: auto;
       vertical-align: top;
 
@@ -53,12 +66,12 @@
         cursor: pointer;
 
         &.picked, &.picked:hover{
-          background-color: #C00;
+          background-color: #4183c4;
           color:#FFF;
         }
 
         &:hover{
-          background-color: #F2F2F2;
+          background-color: #DDD;
         }
       }
     }

@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         stripBanners: true
       },
       dist: {
-        src: ['src/<%= pkg.name %>.js'],
+        src: ['src/jquery.regionpicker.js'],
         dest: 'dist/<%= pkg.name %>.js'
       },
     },

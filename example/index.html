@@ -2,76 +2,97 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Chinese region picker Test Suite</title>
+  <title>Chinese region picker</title>
   <script src="../libs/jquery-loader.js"></script>
   <script src="../example/chineserp.min.js"></script>
-  <script src="../src/jquery.chineserp.js"></script>
+  <script src="../src/jquery.regionpicker.js"></script>
   <link rel="stylesheet" href="../dist/jquery.chineserp.css" media="screen">
   <style type="text/css">
   body{padding:20px;font-size:14px;line-height:200%;color:#333;}
-  #picker input{border:1px solid #666;padding:5px;width: 300px;background-color: #EEE;}
-  #selector select{border:1px solid #666;padding:5px;margin-right:10px;}
+  a{color:#333;}
+  .picker{
+    width: 500px;
+    margin: 50px auto;
+  }
+  .picker input{
+    border:1px solid #CCC;padding:5px;
+    display:block;width: 100%; height:30px; line-height: 30px; color: #666;
+    font-size: 16px;
+    -moz-box-shadow:0 0 5px #ccc inset;
+    -webkit-box-shadow:0 0 5px #ccc inset;
+    box-shadow:0 0 5px #ccc inset;
+  }
+  .clearfix:after{
+    content:'\0020';
+    display:block;
+    overflow:hidden;
+    visibility:hidden;
+    width:0;
+    height:0;
+    clear:both;
+  }
+  #regions-info{
+    width: 800px;
+    margin: 0 auto;
+  }
+  #regions-info ul{
+    float: left;
+    list-style: none;
+    padding: 10px;
+    margin: 10px;
+    border-left: 1px dotted #DDD;
+  }
   </style>
 </head>
 <body>
-<h1>Act as selectors</h1>
-<div id="selector">
-  <select></select>
-  <select></select>
-  <select></select>
-  <p></p>
+
+<div id="picker1" class="picker">
+  <h1>Region Picker via link</h1>
+  <input type="text" readonly="readonly" value="新疆维吾尔自治区,喀什地区,巴楚县" />
+  <a class="region-picker" href="javascript:;" data-remote="/example" data-picked="新疆维吾尔自治区,喀什地区,巴楚县" data-visible="5">
+    Pickup a region
+  </a>
 </div>
 
-
-<h1>Act as a picker</h1>
-<div id="picker">
-  <input type="text" readonly="readonly" value="新疆维吾尔自治区,喀什地区,巴楚县" /> <a href="javascript:;" >pickup a region</a>
+<div id="picker2" class="picker">
+  <h1>Region Picker via button</h1>
+  <button class="region-picker" data-remote="/example" data-picked="310105" type="button">Pickup a region</button>
+  <hr/>
+  <div id="regions-info" class="clearfix"></div>
 </div>
 
 <script type="text/javascript">
   $(function(){
+    function regionInfo(r){
+      var list = [];
+      list.push('<li>ID = '+ r.i +'</li>');
+      list.push('<li>Name = '+ r.n +'</li>');
+      list.push('<li>Alias = '+ r.a +'</li>');
+      list.push('<li>Pinyin = '+ r.y +'</li>');
+      list.push('<li>Abbr = '+ r.b +'</li>');
+      list.push('<li>Postcode = '+ r.z +'</li>');
+      return '<ul>'+ list.join("\n") +'</ul>'
+    };
 
-    $('#picker a').regionPicker({
-      mode: 'picker',
-      remote: '/example',
-      region: $('#picker input').val(),
-      initialize: function(picker){
-        picker.el.text('initializing...');
-      },
-
-      initialized: function(regions, collections, picker){
-        picker.el.text('pickup a region');
-      },
-
-      picked: function(regions, collections, confirmed, picker){
-        if(confirmed){
-          $('#picker input').val(regions.map(function(r){ return r.n; }).join(','));
-        }
-      }
+    $('#picker1 .region-picker').regionPicker().on('picked.rp', function(e, regions){
+      $('#picker1 input').val(regions.map(function(r){ return r.n; }).join(", "));
     });
 
-    $('#selector').regionPicker({
-      mode: 'selector',
-      remote: '/example',
-      initialize: function(picker){
-        $('#selector select').attr('disabled', true);
-      },
-
-      initialized: function(regions, collections, picker){
-        $('#selector select').attr('disabled', false);
-      },
-
-      picked: function(regions, collections, picker){
-        $('#selector p').text(regions.map(function(r){ return r.n; }).join(' > '));
-      },
-
-      option: {
-        text: 'n',
-        value: 'i'
-      }
-      
+    $('#picker2 .region-picker').regionPicker().on('picked.rp', function(e, regions){
+      $('#regions-info').html(regions.map(function(r){ return regionInfo(r); }).join("\n"));
+    })
+    .on('initializing.rp', function(e, picker){
+      $(this).text('initializing').attr('disabled', true);
+    })
+    .on('initialized.rp', function(e, picker){
+      $(this).text('Pickup a region').attr('disabled', false);
+    })
+    .on('loading.rp', function(e, picker){
+      $(this).text('loading...').attr('disabled', true);
+    })
+    .on('loaded.rp', function(e, data, picker){
+      $(this).text('Pickup a region').attr('disabled', false);
     });
-
   });
 </script>
 </body>

@@ -14,6 +14,7 @@
   "predef": [
     "jQuery",
     "QUnit",
+    "ChineseRegion",
     "module",
     "test",
     "asyncTest",
