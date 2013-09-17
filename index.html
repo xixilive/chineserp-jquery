@@ -36,11 +36,17 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>Demo</h1>
-          <div id="demo1">
+          <div id="demo1" class="demo-block">
             <input type="text" readonly="readonly" value="江苏省, 南京市, 玄武区" />
             <a class="region-picker" href="javascript:;" data-remote="json" data-picked="江苏省, 南京市, 玄武区" data-visible="5">
               Pickup a region
             </a>
+          </div>
+
+          <div id="demo2" class="demo-block">
+            <button class="region-picker" data-remote="json" data-picked="310105" type="button">Pickup a region</button>
+            <hr/>
+            <div id="regions-info" class="clearfix"></div>
           </div>
         </section>
 

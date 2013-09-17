@@ -1,4 +1,4 @@
-#demo1{
+.demo-block{
   border:1px solid #EEE;
   background-color: #F7F7F7;
   padding: 20px;
@@ -30,4 +30,16 @@
 #demo1 a.region-picker{
   color: #333;
   text-decoration: underline;
+}
+
+#regions-info{
+  width: 800px;
+  margin: 0 auto;
+}
+#regions-info ul{
+  float: left;
+  list-style: none;
+  padding: 10px;
+  margin: 10px;
+  border-left: 1px dotted #DDD;
 }
