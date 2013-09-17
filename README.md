@@ -49,11 +49,13 @@ $('SELECTOR').regionPicker({OPTIONS}).on('EVENT', HANDLER);
 ### options
 ```javascript
 {
-  remote: 'path_of_json_data',  //see also [Chineserp][crp]
-  picked: 'region_id or region names seperated by comma or space',   //the initial value to be picked
+  remote: 'path_of_json_data',  //URI path of json data files
+  picked: 'region_id or region names',  //the initial value to be picked, names are seperated by comma or space, defaule is empty.
   visible: 10,   //the number of items that should be visibled in list element, default is 10.
+  animate: 0,  //animation speed in ms, 0 means non-animation, default is 0
 }
 ```
+more details for 'remote' at [Chineserp][crp]
 
 ### events
 
