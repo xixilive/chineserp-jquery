@@ -1,5 +1,5 @@
 {
-  "name": "jquery.chineserp",
+  "name": "chineserp",
   "title": "Chinese region picker for jQuery plugin",
   "description": "The best Chinese region picker for jQuery plugin",
   "version": "0.0.1",
@@ -23,5 +23,5 @@
   "dependencies": {
     "jquery": ">=1.5 <=1.9.1"
   },
-  "keywords": ["chinese regions", "picker", "selector", "jquery", "jquery plugin"]
+  "keywords": ["chinese", "regions", "picker", "selector"]
 }
