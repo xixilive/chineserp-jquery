@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Chineserp-jquery by xixilive</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Chineserp-jquery</h1>
+        <h2>Chinese region picker for jQuery plugin</h2>
+        <a href="https://github.com/xixilive/chineserp-jquery" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="chinese-region-picker-plugin-for-jquery" class="anchor" href="#chinese-region-picker-plugin-for-jquery"><span class="octicon octicon-link"></span></a>Chinese region picker plugin for jQuery</h1>
+
+<p>The best region picker plugin for jQuery in China. based on <a href="https://github.com/xixilive/chineserp">Chineserp</a>, data provided by <a href="https://github.com/xixilive/chinese_region_db">Chinese region db</a></p>
+
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>Download the <a href="https://raw.github.com/xixilive/chineserp-jquery/master/dist/jquery.chineserp.min.js">production version</a> or the <a href="https://raw.github.com/xixilive/chineserp-jquery/master/dist/jquery.chineserp.js">development version</a>.</p>
+
+<p>In your web page:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"dist/jquery.chineserp.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"dist/jquery.chineserp.css"</span> <span class="na">media=</span><span class="s">"screen"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="nx">jQuery</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//work with a link and 'data-' attributes</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'a.region-picker'</span><span class="p">).</span><span class="nx">regionPicker</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'picked.rp'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">regions</span><span class="p">){</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">'#picker1 input'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">regions</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">r</span><span class="p">){</span> <span class="k">return</span> <span class="nx">r</span><span class="p">.</span><span class="nx">n</span><span class="p">;</span> <span class="p">}).</span><span class="nx">join</span><span class="p">(</span><span class="s2">", "</span><span class="p">));</span>
+    <span class="p">});</span>
+
+  <span class="c1">//work with a button</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'button.region-picker'</span><span class="p">).</span><span class="nx">regionPicker</span><span class="p">({</span>
+    <span class="nx">remote</span><span class="o">:</span> <span class="s1">'/example'</span><span class="p">,</span>
+    <span class="nx">picked</span><span class="o">:</span> <span class="s1">'310105'</span> <span class="c1">//region code of Shanghai</span>
+  <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'picked.rp'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">regions</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#picker1 input'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">regions</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">r</span><span class="p">){</span> <span class="k">return</span> <span class="nx">r</span><span class="p">.</span><span class="nx">n</span><span class="p">;</span> <span class="p">}).</span><span class="nx">join</span><span class="p">(</span><span class="s2">", "</span><span class="p">));</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"picker1"</span> <span class="na">class=</span><span class="s">"picker"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Region Picker via link<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">readonly=</span><span class="s">"readonly"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"region-picker"</span> <span class="na">href=</span><span class="s">"javascript:;"</span> <span class="na">data-remote=</span><span class="s">"/example"</span> <span class="na">data-picked=</span><span class="s">"新疆维吾尔自治区, 喀什地区, 巴楚县"</span> <span class="na">data-visible=</span><span class="s">"5"</span><span class="nt">&gt;</span>
+    Pickup a region
+  <span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"region-picker"</span> <span class="na">type=</span><span class="s">"button"</span><span class="nt">&gt;</span>Pickup a region<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+<h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'SELECTOR'</span><span class="p">).</span><span class="nx">regionPicker</span><span class="p">({</span><span class="nx">OPTIONS</span><span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'EVENT'</span><span class="p">,</span> <span class="nx">HANDLER</span><span class="p">);</span>
+</pre></div>
+
+<h3>
+<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>options</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="p">{</span>
+  <span class="nx">remote</span><span class="o">:</span> <span class="s1">'path_of_json_data'</span><span class="p">,</span>  <span class="c1">//URI path of json data files</span>
+  <span class="nx">picked</span><span class="o">:</span> <span class="s1">'region_id or region names'</span><span class="p">,</span>  <span class="c1">//the initial value to be picked, names are seperated by comma or space, defaule is empty.</span>
+  <span class="nx">visible</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>   <span class="c1">//the number of items that should be visibled in list element, default is 10.</span>
+  <span class="nx">animate</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1">//animation speed in ms, 0 means non-animation, default is 0</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>more details for 'remote' at <a href="https://github.com/xixilive/chineserp">Chineserp</a></p>
+
+<h3>
+<a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a>events</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'SELECTOR'</span><span class="p">).</span><span class="nx">regionPicker</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">'initializing.rp'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">picker</span><span class="p">){</span>
+  <span class="c1">//fire when plugin initializing</span>
+<span class="p">})</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'SELECTOR'</span><span class="p">).</span><span class="nx">regionPicker</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">'initialized.rp'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">picker</span><span class="p">){</span>
+  <span class="c1">//fire when plugin initialized</span>
+<span class="p">})</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'SELECTOR'</span><span class="p">).</span><span class="nx">regionPicker</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">'picked.rp'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">regions</span><span class="p">,</span> <span class="nx">picker</span><span class="p">){</span>
+  <span class="c1">//fire when a region has picked up,</span>
+  <span class="c1">//the regions argument contains several region objects that picked up by user</span>
+<span class="p">})</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'SELECTOR'</span><span class="p">).</span><span class="nx">regionPicker</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">'loading.rp'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">picker</span><span class="p">){</span>
+  <span class="c1">//fire when plugin is loading data</span>
+<span class="p">})</span>
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'SELECTOR'</span><span class="p">).</span><span class="nx">regionPicker</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">'loaded.rp'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">picker</span><span class="p">){</span>
+  <span class="c1">//fire when data loaded</span>
+<span class="p">})</span>
+</pre></div>
+
+<h3>
+<a name="dom-tree" class="anchor" href="#dom-tree"><span class="octicon octicon-link"></span></a>DOM tree</h3>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"region-picker"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"javascript:;"</span> <span class="na">class=</span><span class="s">"region-picker-closer"</span> <span class="na">title=</span><span class="s">"cancel"</span><span class="nt">&gt;</span><span class="ni">&amp;#215;</span><span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"regions"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"region-list"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;li&gt;</span>REGION<span class="nt">&lt;/li&gt;</span>
+      ...more
+    <span class="nt">&lt;/ul&gt;</span>
+    ...more
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+<h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">jQuery</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'.region-picker'</span><span class="p">).</span><span class="nx">regionPicker</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'picked.rp'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">regions</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">regions</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'initializing.rp'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">picker</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">'initializing'</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'disabled'</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'initialized.rp'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">picker</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">'Pickup a region'</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'disabled'</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'loading.rp'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">picker</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">'loading...'</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'disabled'</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'loaded.rp'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">picker</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">'Pickup a region'</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'disabled'</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>learn more at examples</p>
+
+<h2>
+<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
+
+<ul>
+<li>2013-09-17  v0.0.1  the first version of RegionPicker plugin.</li>
+</ul>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/xixilive/chineserp-jquery/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/xixilive/chineserp-jquery/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/xixilive/chineserp-jquery"></a> is maintained by <a href="https://github.com/xixilive">xixilive</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-35506246-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
