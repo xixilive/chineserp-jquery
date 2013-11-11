@@ -132,6 +132,7 @@ learn more at examples
 
 ## Release History
   * 2013-09-17  v0.0.1  the first version of RegionPicker plugin.
+  * 2013-11-11  v0.0.3  Fix a bug of initialize event handler. It can't initialize again when this plugin was installed on a future-element.
 
 [crp]: https://github.com/xixilive/chineserp
 [crd]: https://github.com/xixilive/chinese_region_db

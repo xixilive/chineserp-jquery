@@ -36,15 +36,14 @@
 
     this.data = { regions: [], collections: [] };
 
+    this.el.on('initializing.rp', $.proxy(this._onInitializing, this));
+    this.el.on('initialized.rp', $.proxy(this._onInitialized, this));
+    $(document).on('keydown', $.proxy(this._onCloserClick, this));
+
     new cr.RegionPicker({
       remote: this.options.remote,
       initialized: $.proxy(this._preInitialize, this)
     });
-
-    this.el.on('initializing.rp', $.proxy(this._onInitializing, this));
-    this.el.on('initialized.rp', $.proxy(this._onInitialized, this));
-    $(document).on('keydown', $.proxy(this._onCloserClick, this));
-    return this;
   };
 
   RegionPicker.prototype = {
