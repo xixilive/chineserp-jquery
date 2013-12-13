@@ -22,7 +22,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['src/jquery.regionpicker.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+        dest: 'dist/jquery.chineserp.js'
       },
     },
     uglify: {
@@ -30,8 +30,8 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: 'dist/<%= pkg.name %>.min.js'
+        src: 'dist/jquery.chineserp.js',
+        dest: 'dist/jquery.chineserp.min.js'
       },
     },
     qunit: {
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
           yuicompress: true
         },
         files: {
-          "dist/<%= pkg.name %>.css": "src/<%= pkg.name %>.less"
+          "dist/jquery.chineserp.css": "src/jquery.chineserp.less"
         }
       }
     }

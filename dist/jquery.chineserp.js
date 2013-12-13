@@ -1,4 +1,4 @@
-/*! Chinese region picker for jQuery plugin - v0.0.1 - 2013-09-17
+/*! Chinese region picker for jQuery plugin - v0.0.4 - 2013-12-13
 * https://github.com/xixilive/chineserp-jquery
 * Copyright (c) 2013 xixilive; Licensed MIT */
 (function($, cr) {
@@ -27,15 +27,14 @@
 
     this.data = { regions: [], collections: [] };
 
+    this.el.on('initializing.rp', $.proxy(this._onInitializing, this));
+    this.el.on('initialized.rp', $.proxy(this._onInitialized, this));
+    $(document).on('keydown', $.proxy(this._onCloserClick, this));
+
     new cr.RegionPicker({
       remote: this.options.remote,
       initialized: $.proxy(this._preInitialize, this)
     });
-
-    this.el.on('initializing.rp', $.proxy(this._onInitializing, this));
-    this.el.on('initialized.rp', $.proxy(this._onInitialized, this));
-    $(document).on('keydown', $.proxy(this._onCloserClick, this));
-    return this;
   };
 
   RegionPicker.prototype = {
